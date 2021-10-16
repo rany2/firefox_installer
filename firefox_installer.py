@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
+import shutil
 from base64 import b64decode
-from os import makedirs, environ
-from os.path import expanduser, dirname
+from os import environ, makedirs
+from os.path import dirname, expanduser, isdir
 from os.path import join as path_join
-from shutil import copyfileobj, move, rmtree
 from tarfile import open as topen
 from tempfile import NamedTemporaryFile, mkdtemp
 from typing import Any, List, Tuple, Union
@@ -24,7 +24,7 @@ def parsed_download_page() -> Any:
     with NamedTemporaryFile() as fp:
         print("Downloading and parsing the download page...")
         with urlopen("https://www.mozilla.org/en-US/firefox/all/") as resp:
-            copyfileobj(resp, fp)
+            shutil.copyfileobj(resp, fp)
         _parse_ret = parse(fp.name)
         print("Download page was downloaded and parsed.")
         return _parse_ret
@@ -101,17 +101,26 @@ def download_and_extract(url: str, extract_dir: str) -> None:
         print()
         print("Downloading...")
         with urlopen(url) as resp:
-            copyfileobj(resp, fp)
+            shutil.copyfileobj(resp, fp)
         print("Download complete.")
         print()
 
+        if isdir(extract_dir):
+            print("Removing old Firefox installation...")
+            print("You will not lose your profiles or data.")
+            shutil.rmtree(extract_dir)
+            print("Old Firefox installation removed.")
+            print()
+
         print("Extracting...")
-        temp_extract = mkdtemp()
-        with topen(fp.name) as tar:
-            tar.extractall(temp_extract)
-        move(f"{temp_extract}/firefox", f"{extract_dir}")
-        rmtree(f"{temp_extract}")
-        print("Extract complete.")
+        try:
+            temp_extract = mkdtemp()
+            with topen(fp.name) as tar:
+                tar.extractall(temp_extract)
+            shutil.move(f"{temp_extract}/firefox", f"{extract_dir}")
+            print("Extract complete.")
+        finally:
+            shutil.rmtree(f"{temp_extract}")
 
 
 def create_desktop(
