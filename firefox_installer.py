@@ -130,7 +130,7 @@ def create_desktop(
     extract_dir: str,
 ) -> None:
     _release_type = product_select
-    wm_class = product_select
+    wm_class = "Firefox"
     if product_select == "desktop_release":
         product_select = ""
         wm_class = "Firefox"
