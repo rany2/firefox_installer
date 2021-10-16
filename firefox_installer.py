@@ -22,7 +22,7 @@ def get_xdg_data_home() -> str:
 
 def parsed_download_page() -> Any:
     with NamedTemporaryFile() as fp:
-        print("Downloading and parsing the download page.")
+        print("Downloading and parsing the download page...")
         with urlopen("https://www.mozilla.org/en-US/firefox/all/") as resp:
             copyfileobj(resp, fp)
         _parse_ret = parse(fp.name)
@@ -170,7 +170,7 @@ def main() -> None:
     download_and_extract(current_href, extract_dir)
 
     print()
-    print("Creating desktop file.")
+    print("Creating desktop file...")
     create_desktop(product_select, platform_select, language_select, extract_dir)
     print("Desktop file created.")
 
