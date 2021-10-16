@@ -96,7 +96,7 @@ StartupNotify=true
 StartupWMClass=Firefox%%%RELEASE_TYPE%%%
 Categories=Network;WebBrowser;
 Keywords=web;browser;internet;
-Actions=new-window;new-private-window;
+Actions=new-window;new-private-window;profile-manager-window;
 
 [Desktop Action new-window]
 Name=New Window
