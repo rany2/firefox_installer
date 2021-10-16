@@ -2,8 +2,8 @@
 
 import base64
 
-data = """
-[Desktop Entry]
+data = """[Desktop Entry]
+Version=1.0
 Name=Firefox%%%RELEASE_TYPE%%%
 GenericName=Web Browser
 GenericName[ar]=متصفح وِب
@@ -313,6 +313,11 @@ Name[xh]=Ifestile yangasese entsha
 Name[zh_CN]=新建隐私浏览窗口
 Name[zh_TW]=新增隱私視窗
 Exec=%%%EXTRACT_DIR%%%/firefox --private-window %u
+
+[Desktop Action profile-manager-window]
+Name=Open the Profile Manager
+Name[cs]=Správa profilů
+Exec=%%%EXTRACT_DIR%%%/firefox --ProfileManager
 """.encode(
     "utf-8"
 )
