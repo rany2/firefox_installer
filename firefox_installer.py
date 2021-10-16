@@ -122,7 +122,7 @@ def create_desktop(
 ) -> None:
     _release_type = product_select
     if product_select == "desktop_release":
-        product_select == ""
+        product_select = ""
     elif product_select == "desktop_beta":
         product_select = " Beta"
     elif product_select == "desktop_developer":
