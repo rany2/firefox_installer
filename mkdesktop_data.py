@@ -2,6 +2,7 @@
 
 import base64
 
+# noinspection SpellCheckingInspection
 data = """[Desktop Entry]
 Version=1.0
 Name=Firefox%%%RELEASE_TYPE%%%
